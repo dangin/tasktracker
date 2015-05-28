@@ -1,0 +1,49 @@
+<!-- Modal Trigger -->
+<md-button class="md-primary" ng-click="showNewTaskModal($event)">
+    Add New Task
+</md-button>
+<!-- Modal Structure -->
+<div id="newTaskModal" class="modal">
+    <div class="modal-content">
+        <h4>Modal Header</h4>
+        <p>A bunch of text</p>
+    </div>
+    <div class="modal-footer">
+        <a ng-click="addNewTask()" class="modal-action modal-close waves-effect waves-green btn-flat">Save</a>
+        <a class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+    </div>
+</div>
+
+<table class="hoverable centered bordered">
+    <thead>
+        <tr>
+            <th>Project</th>
+            <th>Task</th>
+            <th>Status</th>
+            <th>Developers</th>
+            <th>Description</th>
+            <th>Time</th>
+            <th>Created</th>
+            <th>Modified</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-show="isLoading">
+            <td colspan="8">
+                <div class="progress">
+                    <div class="indeterminate"></div>
+                </div>
+            </td>
+        </tr>
+        <tr ng-show="!isLoading" ng-repeat="t in tasks | orderBy:'-modifed'">
+            <td>{{getID(projects, t.project).name}}</td>
+            <td>{{t.name}}</td>
+            <td>{{getID(statuses, t.status).name}}</td>
+            <td>{{getID(developers, t.developer).name}}</td>
+            <td>{{t.description}}</td>
+            <td>{{t.times}}</td>
+            <td>{{t.created | date:'short'}}</td>
+            <td>{{t.modified | date:'short'}}</td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,44 @@
+<md-dialog aria-label="Mango (Fruit)" style="text-align:left;">
+    <md-toolbar>
+        <h2 style="text-align:center;">New Task</h2>
+    </md-toolbar>
+    <form style="width:600px;padding:20px;">
+        <md-dialog-content class="sticky-container">
+
+            <md-input-container>
+                <label>Name</label>
+                <input ng-model="newtask.name">
+            </md-input-container>
+
+            <md-input-container>
+                <label>Project</label>
+                <input ng-model="newtask.project">
+            </md-input-container>
+
+            <md-input-container>
+                <label>Status</label>
+                <input ng-model="newtask.status">
+            </md-input-container>
+
+            <md-input-container>
+                <label>Developer</label>
+                <input ng-model="newtask.developer">
+            </md-input-container>
+
+            <md-input-container>
+                <label>Description</label>
+                <input ng-model="newtask.description">
+            </md-input-container>
+
+        </md-dialog-content>
+
+        <div class="md-actions" layout="row">
+            <md-button class="md-primary">
+                Cancel
+            </md-button>
+            <md-button class="md-primary">
+                Save
+            </md-button>
+        </div>
+    </form>
+</md-dialog>
