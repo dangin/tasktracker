@@ -1,6 +1,17 @@
-angular.module('TaskTracker', ['ngRoute', 'ngMaterial', 'pascalprecht.translate']).config(function ($mdThemingProvider) {
+angular.module('TaskTracker', [
+    'ngRoute',
+    'ngMaterial',
+    'pascalprecht.translate',
+    'dgTimer',
+    'ngMdIcons',
+    'textAngular',
+    'truncate',
+    'tasktracker.filters',
+    'ng-context-menu'
+])
+.config(function ($mdThemingProvider) {
     $mdThemingProvider.theme('default')
-        .primaryPalette('indigo')
+        .primaryPalette('cyan')
         .accentPalette('red')
         .warnPalette('yellow')
         .backgroundPalette('grey');

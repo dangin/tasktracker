@@ -1,0 +1,4 @@
+<div style="white-space:nowrap;" layout="row">
+    <md-button class="md-icon-button md-mini" ng-click="vm.toggleTimer()"><ng-md-icon icon="{{vm.icon()}}" size="32" ng-style="vm.iconStyle()"></ng-md-icon></md-button>
+    <md-button class="button-edit" ng-disabled="!vm.timers.length || !vm.showStart" ng-click="vm.editTimers($event)">{{vm.getTotalTime() | dgTime }}</md-button>
+</div>

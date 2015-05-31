@@ -1,49 +1,65 @@
 <!-- Modal Trigger -->
-<md-button class="md-primary" ng-click="showNewTaskModal($event)">
+<md-button class="md-primary" ng-click="newTask($event)">
     Add New Task
 </md-button>
-<!-- Modal Structure -->
-<div id="newTaskModal" class="modal">
-    <div class="modal-content">
-        <h4>Modal Header</h4>
-        <p>A bunch of text</p>
-    </div>
-    <div class="modal-footer">
-        <a ng-click="addNewTask()" class="modal-action modal-close waves-effect waves-green btn-flat">Save</a>
-        <a class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
-    </div>
-</div>
 
-<table class="hoverable centered bordered">
-    <thead>
-        <tr>
-            <th>Project</th>
-            <th>Task</th>
-            <th>Status</th>
-            <th>Developers</th>
-            <th>Description</th>
-            <th>Time</th>
-            <th>Created</th>
-            <th>Modified</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr ng-show="isLoading">
-            <td colspan="8">
-                <div class="progress">
-                    <div class="indeterminate"></div>
-                </div>
-            </td>
-        </tr>
-        <tr ng-show="!isLoading" ng-repeat="t in tasks | orderBy:'-modifed'">
-            <td>{{getID(projects, t.project).name}}</td>
-            <td>{{t.name}}</td>
-            <td>{{getID(statuses, t.status).name}}</td>
-            <td>{{getID(developers, t.developer).name}}</td>
-            <td>{{t.description}}</td>
-            <td>{{t.times}}</td>
-            <td>{{t.created | date:'short'}}</td>
-            <td>{{t.modified | date:'short'}}</td>
-        </tr>
-    </tbody>
-</table>
+<div class="hoverable centered bordered" layout="column">
+    <div layout="row" layout-align="center center" class="table-headers">
+        <div flex="15">Timer</div>
+        <div flex="15">Project</div>
+        <div flex="25">Task</div>
+        <div flex="45">Description</div>
+        <!--
+            <div flex>Developer</div>
+            <div flex>Created</div>
+            <div flex>Modified</div>
+            -->
+    </div>
+    <div ng-show="isLoading">
+        <div class="progress">
+            <div class="indeterminate"></div>
+        </div>
+    </div>
+
+
+    <div ng-show="!isLoading" ng-repeat="t in tasks | orderBy:'-modifed'" layout="row" layout-align="center center" class="table-rows status-open" context-menu data-target="contextMenu{{$index}}">
+        <div id="contextMenu{{$index}}" style="position:fixed;z-index:10;">
+            <ul class="dropdown-menu" role="menu">
+                <li>
+                    <a class="pointer" role="menuitem" tabindex="1" ng-click="editTask($event, t)">Edit task</a>
+                </li>
+                <li>
+                    <a class="pointer" role="menuitem" tabindex="1" ng-click="deleteTask(t)">Delete task</a>
+                </li>
+
+            </ul>
+        </div>
+
+        <div id="changeStatusMenu{{$index}}" style="position:fixed;z-index:10;">
+            <ul class="dropdown-menu" role="menu">
+                <li ng-repeat="s in statuses" ng-click="changeStatus(t,s)">
+                    <a class="pointer" role="menuitem" tabindex="1">{{s.name}}</a>
+                </li>
+            </ul>
+        </div>
+
+
+        <div class="status-bar status-{{getID(statuses, t.status).name.toLowerCase()}}"  context-menu data-target="changeStatusMenu{{$index}}">
+            <md-tooltip>
+                {{getID(statuses, t.status).name}}
+            </md-tooltip>
+        </div>
+        <div flex="15">
+            <dg-timer timers="t.times"></dg-timer>
+        </div>
+        <div flex="15">{{getID(projects, t.project).name}}</div>
+        <div flex="25">{{t.name}}</div>
+        <div flex="45" style="text-align:left;" ng-click="viewMoreDescription()">{{ t.description | htmlToPlaintext | characters:150 }}</div>
+        <!--
+        <div flex>{{getID(developers, t.developer).name}}</div>
+        <div flex>{{t.created | date:'short'}}</div>
+        <div flex>{{t.modified | date:'short'}}</div>
+        -->
+    </div>
+
+</div>

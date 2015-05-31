@@ -1,0 +1,33 @@
+<md-dialog style="width:800px;text-align:center;">
+    <md-dialog-content>
+        <form name="form">
+            <md-list>
+                <md-subheader>
+                    <h1>Timers{{t.end.toString()}}</h1>
+                </md-subheader>
+                <md-list-item ng-repeat="t in timers">
+                    <div layout="row" layout-sm="row" flex>
+                        <md-input-container>
+                            <label>Start</label>
+                            <input name="start" type="datetime-local" ng-model="t.start" ng-model-options="{allowInvalid:false}" max="{{t.end | date: 'yyyy-MM-ddTHH:mm:ss'}}" style="text-align:center;">
+                        </md-input-container>
+                        <md-input-container>
+                            <label>End</label>
+                            <input name="end" type="datetime-local" ng-model="t.end" ng-model-options="{allowInvalid:false}" min="{{t.start | date: 'yyyy-MM-ddTHH:mm:ss'}}" style="text-align:center;">
+                        </md-input-container>
+                        <ng-md-icon icon="delete" style="fill: red" size="60"></ng-md-icon>
+                        <ng-md-icon icon="cancel" style="fill: red" size="60"></ng-md-icon>
+                    </div>
+                </md-list-item>
+            </md-list>
+        </form>
+    </md-dialog-content>
+    <div class="md-actions">
+        <md-button ng-click="cancel()" class="md-primary">
+            Cancel
+        </md-button>
+        <md-button ng-click="close()" class="md-primary" ng-disabled="form.$valid">
+            Save
+        </md-button>
+    </div>
+</md-dialog>

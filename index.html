@@ -4,34 +4,32 @@
 <head>
     <meta charset="UTF-8">
     <title>TaskTracker</title>
-    <link rel="stylesheet" href="css/angular-material.css">
+
     <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/textAngular.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/angular-material.css">
 </head>
 
 <body ng-controller="mainController">
 
     <md-content>
         <md-toolbar>
-                <div class="md-toolbar-tools">
-                   <span flex></span>
-                   <h1>Just adding a change</h1>
-                    <h2>{{appName}}</h2>
-                    <span flex></span>
-
-                    <select ng-options="lang.locale as lang.name for lang in languages" ng-model="currentLanguage" ng-change="changeLanguage()"></select>
-                    <md-button ng-repeat="m in menuItems">
-                        <a href="#/{{m.link}}" translate="menu.{{m.name | lowercase }}">
-
-                        </a>
-                    </md-button>
-                    <span flex></span>
-                </div>
+            <div class="md-toolbar-tools">
+                <span flex></span>
+                <h2>{{appName}}</h2>
+                <span flex></span>
+                <select ng-options="lang.locale as lang.name for lang in languages" ng-model="currentLanguage" ng-change="changeLanguage()"></select>
+                <md-button ng-repeat="m in menuItems" href="#/{{m.link}}" translate="menu.{{m.name | lowercase }}"></md-button>
+                <span flex></span>
+            </div>
         </md-toolbar>
     </md-content>
 
     <div class="container">
-        <div ng-view></div>
+        <ng-view></ng-view>
     </div>
 
     <!--Libraries-->
@@ -44,8 +42,18 @@
     <script src="js/lib/angular/angular-route.js"></script>
     <script src="js/lib/angular/angular-aria.js"></script>
     <script src="js/lib/angular/angular-material.js"></script>
+    <script src="js/lib/angular/angular-material-icons.min.js"></script>
+    <script src="js/lib/svg-morpheus.js"></script>
+    <script src="js/lib/angular/textAngular/textAngular-rangy.min.js"></script>
+    <script src="js/lib/angular/textAngular/textAngular-sanitize.min.js"></script>
+    <script src="js/lib/angular/textAngular/textAngular.min.js"></script>
+    <script src="js/lib/angular/truncate.js"></script>
+    <script src="js/lib/angular/ng-context-menu.min.js"></script>
+
     <!--App-->
+    <script src="js/app/timer/timer.js"></script>
     <script src="js/app/tasktracker.js"></script>
+    <script src="js/app/filters/filters.js"></script>
     <script src="js/app/mainController.js"></script>
     <script src="js/app/taskController.js"></script>
     <script src="js/app/settingsController.js"></script>

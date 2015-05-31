@@ -1,42 +1,38 @@
 <md-dialog aria-label="Mango (Fruit)" style="text-align:left;">
     <md-toolbar>
-        <h2 style="text-align:center;">New Task</h2>
+        <h3 style="text-align:center;">New Task</h3>
     </md-toolbar>
-    <form style="width:600px;padding:20px;">
+    <form style="width:900px;padding:20px;">
         <md-dialog-content class="sticky-container">
+            <div layout="row" layout-align="center center">
+                <md-input-container flex="50">
+                    <label>Name</label>
+                    <input ng-model="newtask.name" autofocus>
+                </md-input-container>
+                <div flex="5"></div>
+                <md-select placeholder="Projects" ng-model="newtask.project" flex="15">
+                    <md-option ng-repeat="p in lists.projects" value="{{p.id}}">{{p.name}}</md-option>
+                </md-select>
 
-            <md-input-container>
-                <label>Name</label>
-                <input ng-model="newtask.name">
-            </md-input-container>
+                <md-select placeholder="Status" ng-model="newtask.status" flex="15">
+                    <md-option ng-repeat="s in lists.statuses" value="{{s.id}}">{{s.name}}</md-option>
+                </md-select>
 
-            <md-input-container>
-                <label>Project</label>
-                <input ng-model="newtask.project">
-            </md-input-container>
+                <md-select placeholder="Developer" ng-model="newtask.developer" flex="15">
+                    <md-option ng-repeat="d in lists.developers" value="{{d.id}}">{{d.name}}</md-option>
+                </md-select>
+            </div>
 
-            <md-input-container>
-                <label>Status</label>
-                <input ng-model="newtask.status">
-            </md-input-container>
 
-            <md-input-container>
-                <label>Developer</label>
-                <input ng-model="newtask.developer">
-            </md-input-container>
-
-            <md-input-container>
-                <label>Description</label>
-                <input ng-model="newtask.description">
-            </md-input-container>
+            <text-angular ng-model="newtask.description"></text-angular>
 
         </md-dialog-content>
 
         <div class="md-actions" layout="row">
-            <md-button class="md-primary">
+            <md-button class="md-primary" ng-click="cancel()" type="button">
                 Cancel
             </md-button>
-            <md-button class="md-primary">
+            <md-button class="md-primary" ng-click="save()" type="submit">
                 Save
             </md-button>
         </div>
